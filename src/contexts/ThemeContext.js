@@ -6,10 +6,11 @@ export default class ThemeContextProvider extends Component {
   constructor() {
     super();
     this.state = {
+      isPurpleTheme: true,
       purple: {
-        mainColor: '#4c2a4c',
+        mainColor: '#eee',
         ui: "#6d3d6d",
-        bg: "#eee"
+        bg: "#4c2a4c"
       },
       dark: {
         mainColor: '#ddd',
@@ -19,9 +20,14 @@ export default class ThemeContextProvider extends Component {
     }
   }
 
+  // this should flip the flag
+  toggleTheme = () => {
+    this.setState({...this.state, isPurpleTheme: !this.state.isPurpleTheme})
+  }
+
   render() {
     return (
-      <ThemeContext.Provider value={{...this.state}}>
+      <ThemeContext.Provider value={{...this.state, toggleTheme: this.toggleTheme}}>
         {this.props.children}
       </ThemeContext.Provider>
     )
@@ -29,3 +35,9 @@ export default class ThemeContextProvider extends Component {
 }
 
 // this.props.children - refers to navbar, booklist, everything rendered in themeContextProvider
+
+/*
+
+theme context provider -> value is global state
+
+*/
